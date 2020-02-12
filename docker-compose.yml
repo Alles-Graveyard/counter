@@ -1,0 +1,8 @@
+version: "3.4"
+
+services:
+  main:
+    build: .
+    restart: always
+    ports:
+      - 8012:8012
