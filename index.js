@@ -1,5 +1,5 @@
 const fs = require("fs");
-const data = {};
+var data = {};
 
 //Image
 const template = fs.readFileSync(__dirname + "/template.svg", "utf8").split("[x]");
@@ -21,3 +21,6 @@ app.get("/:id", async (req, res) => {
     data[id] = (typeof data[id] === "undefined") ? 1 : data[id] + 1;
     res.type("image/png").send(await image(data[id]));
 });
+
+//Refresh every 24 hours
+setInterval(() => data = {}, 1000 * 60 * 60 * 24);
