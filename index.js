@@ -23,7 +23,6 @@ const ratelimit = require("express-rate-limit")({
     message: "You have angered the gods."
 });
 
-
 //Image Counter
 app.get("/:id", ratelimit, async (req, res) => {
     if (sum(data) > 10000) data = {};
