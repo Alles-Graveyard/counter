@@ -3,10 +3,10 @@ var data = {};
 
 //Image
 const template = fs.readFileSync(__dirname + "/template.svg", "utf8").split("[x]");
-const {convert} = require("convert-svg-to-png");
-const image = async content => {
+const svg2png = require("svg2png");
+const image = content => {
     const svg = template[0] + content + template[1];
-    const png = await convert(svg);
+    const png = svg2png.sync(svg);
     return png;
 };
 
@@ -23,12 +23,24 @@ const ratelimit = require("express-rate-limit")({
     message: "You have angered the gods."
 });
 
+//Static Site
+app.use(express.static(__dirname + "/site"));
+
 //Image Counter
-app.get("/:id", ratelimit, async (req, res) => {
+app.get("/:id", ratelimit, (req, res) => {
     if (sum(data) > 10000) data = {};
+
     const {id} = req.params;
     data[id] = (typeof data[id] === "undefined") ? 1 : data[id] + 1;
-    res.type("image/png").send(await image(data[id]));
+    
+    var img;
+    try {
+        img = image(data[id]);
+    } catch (err) {
+        return res.status(500).send("Something went wrong.");
+    }
+
+    res.type("image/png").send(img);
 });
 
 //Count Values
