@@ -13,6 +13,7 @@ const image = content => {
 //Express
 const express = require("express");
 const app = express();
+const cors = require("cors");
 app.set("trust proxy", 1);
 app.listen(8012);
 
@@ -27,7 +28,7 @@ const ratelimit = require("express-rate-limit")({
 app.use(express.static(__dirname + "/site"));
 
 //Image Counter
-app.get("/:id", ratelimit, (req, res) => {
+app.get("/:id", cors(), ratelimit, (req, res) => {
     if (sum(data) > 10000) data = {};
 
     const {id} = req.params;
