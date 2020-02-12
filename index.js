@@ -13,10 +13,19 @@ const image = async content => {
 //Express
 const express = require("express");
 const app = express();
+app.set("trust proxy", 1);
 app.listen(8012);
 
-//ID
-app.get("/:id", async (req, res) => {
+//Ratelimiting
+const ratelimit = require("express-rate-limit")({
+    windowMs: 1000 * 60,
+    max: 50,
+    message: "You have angered the gods."
+});
+
+
+//Image Counter
+app.get("/:id", ratelimit, async (req, res) => {
     const {id} = req.params;
     data[id] = (typeof data[id] === "undefined") ? 1 : data[id] + 1;
     res.type("image/png").send(await image(data[id]));
