@@ -1,6 +1,14 @@
 const fs = require("fs");
+const data = {};
+
+//Image
 const template = fs.readFileSync(__dirname + "/template.svg", "utf8").split("[x]");
 const {convert} = require("convert-svg-to-png");
+const image = async content => {
+    const svg = template[0] + content + template[1];
+    const png = await convert(svg);
+    return png;
+};
 
 //Express
 const express = require("express");
@@ -9,7 +17,7 @@ app.listen(8012);
 
 //ID
 app.get("/:id", async (req, res) => {
-    const svg = template[0] + Math.floor(Math.random() * 1000) + template[1];
-    const png = await convert(svg);
-    res.type("image/png").send(png);
+    const {id} = req.params;
+    data[id] = (typeof data[id] === "undefined") ? 1 : data[id] + 1;
+    res.type("image/png").send(await image(data[id]));
 });
