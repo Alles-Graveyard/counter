@@ -26,10 +26,13 @@ const ratelimit = require("express-rate-limit")({
 
 //Image Counter
 app.get("/:id", ratelimit, async (req, res) => {
+    if (sum(data) > 10000) data = {};
     const {id} = req.params;
     data[id] = (typeof data[id] === "undefined") ? 1 : data[id] + 1;
     res.type("image/png").send(await image(data[id]));
 });
 
-//Refresh every 24 hours
-setInterval(() => data = {}, 1000 * 60 * 60 * 24);
+//Count Values
+function sum(obj) {
+    return Object.keys(obj).reduce((sum,key)=>sum+parseFloat(obj[key]||0),0);
+};
