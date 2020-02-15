@@ -8,7 +8,8 @@ const sequelize = new Sequelize("counter", credentials.db.username, credentials.
     dialect: "mariadb",
     dialectOptions: {
         timezone: "Etc/GMT0"
-    }
+    },
+    logging: false
 });
 const Request = sequelize.define("request", {
     code: {
@@ -38,7 +39,7 @@ app.listen(8012);
 //Ratelimiting
 const ratelimit = require("express-rate-limit")({
     windowMs: 1000 * 60,
-    max: 20,
+    max: 60,
     message: "You have angered the gods."
 });
 
