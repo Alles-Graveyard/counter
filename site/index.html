@@ -12,8 +12,8 @@
 
         <h1>Counter, by Alles.</h1>
         <p>
-            Counter is a service by Alles that allows you to use one line of code to get very simple analytics.
-            It's just an image, with a unique id that you can make whatever you want. No API keys, no registration, just an img tag.
+            Counter is a service by Alles that allows you to use one line of code to view and count visits in the last 24 hours.
+            It's just an image, with an id that you can make whatever you want. No API keys, no registration, just an img tag.
         </p>
         <code><i>&lt;</i><i>img</i> <i>src</i><i>=</i><i>"https://counter.alles.cx/[id]"</i> <i>/&gt;</i></code>
         <p>
@@ -29,16 +29,16 @@
 
         <h3>What data does Counter collect?</h3>
         <p>
-            The only data counter collects is the user's IP address, which we only store temporarily for ratelimiting.
+            The only data counter collects is the user's IP address, which we store in order to prevent abuse.
             Counter aims to store as little data as possible, so it's very privacy-friendly.
             You don't even have to sign in to use it.
         </p>
 
         <h3>How long will you store the visitor count?</h3>
         <p>
-            Currently, the visitor count for all sites is reset after 10,000 visitors are stored.
-            We store the visitors in memory, so if the server restarts, data is wiped.
-            If Counter recieves a lot of use, we'll use a database and make the count persist indefinately.
+            Counter stores requests indefinately.
+            The counter only displays the amount of requests within the last 24 hours.
+            Information about individual requests is not publically accessible.
         </p>
 
         <h3>Can I use the same Counter across sites?</h3>
@@ -51,6 +51,11 @@
         <p>
             Simply use a different id.
             If you are recieving spam requests, unfortunately, there isn't much we can do for now, because there is no site verification.
+        </p>
+
+        <h3>What happens if I try to abuse this service?</h3>
+        <p>
+            If you attempt to carry out a DoS attack, or spam the database, your IP will be blocked and potentially added to the Alles blocklist, which means that your network will be unable to access most services we offer.
         </p>
 
         <h3>How long will this service exist/be free?</h3>
