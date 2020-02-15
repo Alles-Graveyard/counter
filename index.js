@@ -1,5 +1,23 @@
 const fs = require("fs");
-var data = {};
+const credentials = require("./credentials");
+
+//Database
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize("counter", credentials.db.username, credentials.db.password, {
+    host: credentials.db.host,
+    dialect: "mariadb",
+    dialectOptions: {
+        timezone: "Etc/GMT0"
+    }
+});
+const Request = sequelize.define("request", {
+    code: {
+        type: Sequelize.STRING
+    },
+    address: {
+        type: Sequelize.STRING
+    }
+});
 
 //Image
 const template = fs.readFileSync(__dirname + "/template.svg", "utf8").split("[x]");
@@ -20,7 +38,7 @@ app.listen(8012);
 //Ratelimiting
 const ratelimit = require("express-rate-limit")({
     windowMs: 1000 * 60,
-    max: 50,
+    max: 20,
     message: "You have angered the gods."
 });
 
@@ -28,23 +46,31 @@ const ratelimit = require("express-rate-limit")({
 app.use(express.static(__dirname + "/site"));
 
 //Image Counter
-app.get("/:id", cors(), ratelimit, (req, res) => {
-    if (sum(data) > 10000) data = {};
+app.get("/:code", cors(), ratelimit, async (req, res) => {
+    const {code} = req.params;
+    if (code.length > 16) return res.status(400).send("Code must be less than 16 characters");
+    
+    const since = new Date(new Date().getTime() - 1000 * 60 * 60 * 24);
+    const count = (await Request.findAll({
+        where: {
+            code,
+            createdAt: {
+                [Sequelize.Op.gte]: since
+            }
+        }
+    })).length + 1;
 
-    const {id} = req.params;
-    data[id] = (typeof data[id] === "undefined") ? 1 : data[id] + 1;
+    Request.create({
+        code,
+        address: req.ip
+    });
     
     var img;
     try {
-        img = image(data[id]);
+        img = image(count);
     } catch (err) {
         return res.status(500).send("Something went wrong.");
     }
 
     res.type("image/png").send(img);
 });
-
-//Count Values
-function sum(obj) {
-    return Object.keys(obj).reduce((sum,key)=>sum+parseFloat(obj[key]||0),0);
-};
