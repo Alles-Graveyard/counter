@@ -66,12 +66,16 @@ app.get("/:code", cors(), ratelimit, async (req, res) => {
         address: req.ip
     });
     
-    var img;
+    if (typeof req.query.text !== "undefined") {
+        res.send(count.toString());
+    } else {
+        var img;
     try {
         img = image(count);
-    } catch (err) {
-        return res.status(500).send("Something went wrong.");
-    }
+        } catch (err) {
+            return res.status(500).send("Something went wrong.");
+        }
 
-    res.type("image/png").send(img);
+        res.type("image/png").send(img);
+    }
 });
