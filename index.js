@@ -13,10 +13,15 @@ const sequelize = new Sequelize("counter", credentials.db.username, credentials.
 });
 const Request = sequelize.define("request", {
     code: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    url: {
         type: Sequelize.STRING
     },
     address: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 
@@ -63,6 +68,7 @@ app.get("/:code", cors(), ratelimit, async (req, res) => {
 
     Request.create({
         code,
+        url: req.headers.referer,
         address: req.ip
     });
     
