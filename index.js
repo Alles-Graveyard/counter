@@ -52,14 +52,14 @@ app.get("/:code", cors(), ratelimit, async (req, res) => {
     if (code.length > 16) return res.status(400).send("Code must be less than 16 characters");
     
     const since = new Date(new Date().getTime() - 1000 * 60 * 60 * 24);
-    const count = (await Request.findAll({
+    const count = (await Request.count({
         where: {
             code,
             createdAt: {
                 [Sequelize.Op.gte]: since
             }
         }
-    })).length + 1;
+    })) + 1;
 
     Request.create({
         code,
