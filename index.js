@@ -23,6 +23,8 @@ const Request = sequelize.define("request", {
         type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    updatedAt: false
 });
 
 //Image
