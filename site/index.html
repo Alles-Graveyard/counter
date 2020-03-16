@@ -1,103 +1,118 @@
 <html>
-    <head>
-        <title>Counter.</title>
-        <link href="/icon.png" rel="shortcut icon" />
-        <link href="/style.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <header>
-        <img src="/_" />
-        <h1>Counter.</h1>
-    </header>
-    <main>
+	<head>
+		<title>Counter.</title>
+		<link href="/icon.png" rel="shortcut icon" />
+		<link href="/style.css" rel="stylesheet" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<header>
+		<img src="/_" />
+		<h1>Counter.</h1>
+	</header>
+	<main>
+		<h1>Counter, by Alles.</h1>
+		<p>
+			Counter is a service by Alles that allows you to use one line of code to
+			view and count visits in the last 24 hours. It's just an image, with an id
+			that you can make whatever you want. No API keys, no registration, just an
+			img tag.
+		</p>
+		<code
+			><i>&lt;</i><i>img</i> <i>src</i><i>=</i
+			><i>"https://counter.alles.cx/[id]"</i> <i>/&gt;</i></code
+		>
+		<p>
+			Replace [id] with whatever you want, and it will show how many times that
+			specific id has been seen.
+			<b>It just works</b>.
+		</p>
+		<p>
+			You could use it on your website, in an email, or in a discord channel. If
+			you wanted, you could hide the image on your site. Counter is simple,
+			privacy-friendly and versatile.
+		</p>
 
-        <h1>Counter, by Alles.</h1>
-        <p>
-            Counter is a service by Alles that allows you to use one line of code to view and count visits in the last 24 hours.
-            It's just an image, with an id that you can make whatever you want.
-            No API keys, no registration, just an img tag.
-        </p>
-        <code><i>&lt;</i><i>img</i> <i>src</i><i>=</i><i>"https://counter.alles.cx/[id]"</i> <i>/&gt;</i></code>
-        <p>
-            Replace [id] with whatever you want, and it will show how many times that specific id has been seen.
-            <b>It just works</b>.
-        </p>
-        <p>
-            You could use it on your website, in an email, or in a discord channel.
-            If you wanted, you could hide the image on your site.
-            Counter is simple, privacy-friendly and versatile.
-        </p>
+		<br />
+		<br />
 
-        <br />
-        <br />
+		<h2>FAQ</h2>
 
-        <h2>FAQ</h2>
+		<h3>What data does Counter collect?</h3>
+		<p>
+			The only data counter collects is the user's IP address, which we store in
+			order to prevent abuse. Counter aims to store as little data as possible,
+			so it's very privacy-friendly. You don't even have to sign in to use it.
+		</p>
 
-        <h3>What data does Counter collect?</h3>
-        <p>
-            The only data counter collects is the user's IP address, which we store in order to prevent abuse.
-            Counter aims to store as little data as possible, so it's very privacy-friendly.
-            You don't even have to sign in to use it.
-        </p>
+		<h3>How long will you store the visitor count?</h3>
+		<p>
+			Counter stores requests indefinately. The counter only displays the amount
+			of requests within the last 24 hours. Information about individual
+			requests is not publically accessible.
+		</p>
 
-        <h3>How long will you store the visitor count?</h3>
-        <p>
-            Counter stores requests indefinately.
-            The counter only displays the amount of requests within the last 24 hours.
-            Information about individual requests is not publically accessible.
-        </p>
+		<h3>Can I use the same Counter across sites?</h3>
+		<p>
+			Sure! There are no restrictions on where the counter can be placed, and
+			you can simply use the same code for multiple counter images. We have CORS
+			enabled on the image endpoint.
+		</p>
 
-        <h3>Can I use the same Counter across sites?</h3>
-        <p>
-            Sure! There are no restrictions on where the counter can be placed, and you can simply use the same code for multiple counter images.
-            We have CORS enabled on the image endpoint.
-        </p>
+		<h3>Can I get my site's visitor count in plain text?</h3>
+		<p>
+			Sure, just add ?text to the normal image url. Like the image, this will
+			also add to your count, and it is ratelimited.
+		</p>
 
-        <h3>Can I get my site's visitor count in plain text?</h3>
-        <p>
-            Sure, just add ?text to the normal image url.
-            Like the image, this will also add to your count, and it is ratelimited.
-        </p>
-        
-        <h3>How can I reset my site's counter?</h3>
-        <p>
-            Simply use a different id.
-            If you are recieving spam requests, unfortunately, there isn't much we can do for now, because there is no site verification.
-        </p>
+		<h3>How can I reset my site's counter?</h3>
+		<p>
+			Simply use a different id. If you are recieving spam requests,
+			unfortunately, there isn't much we can do for now, because there is no
+			site verification.
+		</p>
 
-        <h3>What happens if I try to abuse this service?</h3>
-        <p>
-            If you attempt to carry out a DoS attack, or spam the database, your IP will be blocked and potentially added to the Alles blocklist, which means that your network will be unable to access most services we offer.
-        </p>
+		<h3>What happens if I try to abuse this service?</h3>
+		<p>
+			If you attempt to carry out a DoS attack, or spam the database, your IP
+			will be blocked and potentially added to the Alles blocklist, which means
+			that your network will be unable to access most services we offer.
+		</p>
 
-        <h3>How long will this service exist/be free?</h3>
-        <p>
-            We plan to keep this service online as long as we can, and it will be free forever.
-            It's a useful tool that we think everybody should be able to use.
-        </p>
+		<h3>How long will this service exist/be free?</h3>
+		<p>
+			We plan to keep this service online as long as we can, and it will be free
+			forever. It's a useful tool that we think everybody should be able to use.
+		</p>
 
-        <h3>Can I host this myself?</h3>
-        <p>
-            Sure! It's all <a href="https://github.com/alleshq/counter-image">open-source on GitHub</a>, so you can download and host it yourself, or even propose some changes.
-        </p>
+		<h3>Can I host this myself?</h3>
+		<p>
+			Sure! It's all
+			<a href="https://github.com/alleshq/counter-image"
+				>open-source on GitHub</a
+			>, so you can download and host it yourself, or even propose some changes.
+		</p>
 
-        <h3>Who made this?</h3>
-        <p>
-            Me, <a href="https://abaer.dev">Archie Baer</a>!
-            I run <a href="https://alleshq.com">Alles</a>, and I'm <a href="https://alles.cx/u/archie">@archie</a> over there.
-            You can contact me via <a href="mailto:archie@abaer.dev">email</a> or <a href="https://twitter.com/archiebaer">Twitter</a>.
-            If you want a really speedy response, you could also join the <a href="https://discord.gg/6Z27nuh">Alles discord server</a>.
-        </p>
+		<h3>Who made this?</h3>
+		<p>
+			Me, <a href="https://abaer.dev">Archie Baer</a>! I run
+			<a href="https://alleshq.com">Alles</a>, and I'm
+			<a href="https://alles.cx/u/archie">@archie</a> over there. You can
+			contact me via <a href="mailto:archie@abaer.dev">email</a> or
+			<a href="https://twitter.com/archiebaer">Twitter</a>. If you want a really
+			speedy response, you could also join the
+			<a href="https://discord.gg/6Z27nuh">Alles discord server</a>.
+		</p>
 
-        <h3>How can I support the project?</h3>
-        <p>
-            While this doesn't cost too much to run, I'd appreciate it if you were to donate.
-            It would help me not only keep this service online, but also fund <a href="https://abaer.dev">my other projects</a>.
-            You can donate to me on <a href="https://patreon.com/archiebaer">Patreon</a>.
-        </p>
+		<h3>How can I support the project?</h3>
+		<p>
+			While this doesn't cost too much to run, I'd appreciate it if you were to
+			donate. It would help me not only keep this service online, but also fund
+			<a href="https://abaer.dev">my other projects</a>. You can donate to me on
+			<a href="https://patreon.com/archiebaer">Patreon</a>.
+		</p>
 
-        <br />
-        <br />
-        <p>Made with &hearts; by <a href="https://alleshq.com">Alles</a>.</p>
-    </main>
+		<br />
+		<br />
+		<p>Made with &hearts; by <a href="https://alleshq.com">Alles</a>.</p>
+	</main>
 </html>
