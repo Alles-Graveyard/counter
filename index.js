@@ -52,7 +52,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 app.set("trust proxy", 1);
-app.listen(8006);
+app.listen(8007);
 
 //Ratelimiting
 const ratelimit = require("express-rate-limit")({
