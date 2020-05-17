@@ -68,7 +68,7 @@ app.use(express.static(__dirname + "/site"));
 app.get("/:code", cors(), ratelimit, async (req, res) => {
 	const {code} = req.params;
 	if (code.length > 16)
-		return res.status(400).send("Code must be less than 16 characters");
+		return res.status(400).send("Code must 16 characters or less");
 
 	const since = new Date(new Date().getTime() - 1000 * 60 * 60 * 24);
 	const count =
