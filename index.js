@@ -64,19 +64,55 @@ const ratelimit = require("express-rate-limit")({
 // Static Site
 app.use(express.static(__dirname + "/site"));
 
+// Stats
+let stats = {};
+app.get("/stats", (req, res) => res.json(stats));
+const updateStats = async () => {
+	stats = {
+		total: await Request.count(),
+		addresses: await Request.count({
+			distinct: true,
+			col: "address"
+		}),
+		codes: await Request.count({
+			distinct: true,
+			col: "code"
+		}),
+		urls: await Request.count({
+			distinct: true,
+			col: "url"
+		}),
+		day: await Request.count({
+			where: {
+				createdAt: {
+					[Sequelize.Op.gte]: new Date().getTime() - 1000 * 60 * 60 * 24
+				}
+			}
+		}),
+		month: await Request.count({
+			where: {
+				createdAt: {
+					[Sequelize.Op.gte]: new Date().getTime() - 1000 * 60 * 60 * 24 * 30
+				}
+			}
+		})
+	};
+};
+updateStats();
+setInterval(updateStats, 60000);
+
 // Image Counter
 app.get("/:code", cors(), ratelimit, async (req, res) => {
 	const {code} = req.params;
 	if (code.length > 16)
 		return res.status(400).send("Code must 16 characters or less");
 
-	const since = new Date(new Date().getTime() - 1000 * 60 * 60 * 24);
 	const count =
 		(await Request.count({
 			where: {
 				code,
 				createdAt: {
-					[Sequelize.Op.gte]: since
+					[Sequelize.Op.gte]: new Date().getTime() - 1000 * 60 * 60 * 24
 				}
 			}
 		})) + 1;
