@@ -1,7 +1,7 @@
 const fs = require("fs");
 const credentials = require("./credentials");
 
-//Database
+// Database
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
 	"counter",
@@ -36,7 +36,7 @@ const Request = sequelize.define(
 	}
 );
 
-//Image
+// Image
 const template = fs
 	.readFileSync(__dirname + "/template.svg", "utf8")
 	.split("[x]");
@@ -47,24 +47,24 @@ const image = content => {
 	return png;
 };
 
-//Express
+// Express
 const express = require("express");
 const app = express();
 const cors = require("cors");
 app.set("trust proxy", 1);
 app.listen(8007);
 
-//Ratelimiting
+// Ratelimiting
 const ratelimit = require("express-rate-limit")({
 	windowMs: 1000 * 60,
 	max: 60,
 	message: "You have angered the gods."
 });
 
-//Static Site
+// Static Site
 app.use(express.static(__dirname + "/site"));
 
-//Image Counter
+// Image Counter
 app.get("/:code", cors(), ratelimit, async (req, res) => {
 	const {code} = req.params;
 	if (code.length > 16)
