@@ -19,11 +19,20 @@
 		</p>
 		<code
 			><i>&lt;</i><i>img</i> <i>src</i><i>=</i
-			><i>"https://counter.alles.cx/[id]"</i> <i>/&gt;</i></code
+			><i>"https://counter.alles.cx/<span id="code"></span>"</i>
+			<i>/&gt;</i></code
 		>
+
+		<script>
+			const chars = "abcdefghijklmnopqrstuvwxyz1234567890";
+			for (var i = 0; i < 16; i++) {
+				code.innerText += chars[Math.floor(Math.random() * chars.length)];
+			}
+		</script>
+
 		<p>
-			Replace [id] with whatever you want, and it will show how many times that
-			specific id has been seen.
+			The id can be any string under 16 characters, and the image will show how
+			many times that specific id has been seen.
 			<b>It just works</b>.
 		</p>
 		<p>
